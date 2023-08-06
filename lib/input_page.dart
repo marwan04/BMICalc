@@ -3,49 +3,98 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reusable_card.dart';
 
+const bottomContainerHeight = 80;
+const activeCardColor = Color(0xFF1D1E33);
+const inActiveCardColor = Color(0xFF111328);
+const bottomContainerColor = Color(0xFFEB1555);
+enum Gender {Male , Female}
+
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
 }
 
 class _InputPageState extends State<InputPage> {
+
+  Color maleCardColor = inActiveCardColor;
+  Color femaleCardColor = inActiveCardColor;
+
+  void updateColor(Gender gender) {
+    if (gender == Gender.Male) {
+      if (maleCardColor == activeCardColor){
+        maleCardColor = inActiveCardColor;
+      }
+      else {
+        maleCardColor = activeCardColor;
+      }
+      if(femaleCardColor == activeCardColor){
+        femaleCardColor = inActiveCardColor;
+      }
+    }
+    if (gender == Gender.Female) {
+      if (femaleCardColor == activeCardColor){
+        femaleCardColor = inActiveCardColor;
+      }
+      else {
+        femaleCardColor = activeCardColor;
+      }
+      if(maleCardColor == activeCardColor){
+        maleCardColor = inActiveCardColor;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text('BMI CALCULATOR'),
         ),
-        body: const Column(
+        body: Column(
           children: [
             Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: ReusableCard(
-                      Color(0xFF1D1E33),
-                      cardChild: IconContent(FontAwesomeIcons.mars, 'Male'),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          updateColor(Gender.Male);
+                        });
+                      },
+                      child: ReusableCard(
+                        maleCardColor,
+                        cardChild:const IconContent(FontAwesomeIcons.mars, 'Male'),
+                      ),
                     ),
                   ),
                   Expanded(
-                    child: ReusableCard(
-                      Color(0xFF1D1E33),
-                      cardChild: IconContent(FontAwesomeIcons.venus, 'Female'),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          updateColor(Gender.Female);
+                        });
+                      },
+                      child: ReusableCard(
+                        femaleCardColor,
+                        cardChild: const IconContent(FontAwesomeIcons.venus, 'Female'),
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            Expanded(
-              child: ReusableCard(Color(0xFF1D1E33)),
+            const Expanded(
+              child: ReusableCard(inActiveCardColor),
             ),
-            Expanded(
+            const Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: ReusableCard(Color(0xFF1D1E33)),
+                    child: ReusableCard(inActiveCardColor),
                   ),
                   Expanded(
-                    child: ReusableCard(Color(0xFF1D1E33)),
+                    child: ReusableCard(inActiveCardColor),
                   ),
                 ],
               ),
