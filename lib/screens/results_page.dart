@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:untitled1/components/reusable_card.dart';
 import '../constants.dart';
 import '../components/bottom_button.dart';
+import '../calculator_brain.dart';
 
 class ResultPage extends StatelessWidget {
-  const ResultPage({super.key});
+  ResultPage({required this.bmi , required this.state , required this.desc , super.key});
+
+  String bmi ;
+  String state;
+  String desc;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,7 @@ class ResultPage extends StatelessWidget {
               ),
             ),
           ),
-          const Expanded(
+          Expanded(
             flex: 5,
             child: ReusableCard(
               kActiveCardColor,
@@ -35,15 +40,15 @@ class ResultPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Normal',
+                    state,
                     style: kResultTextStyle,
                   ),
                   Text(
-                    '18.3',
+                    bmi,
                     style: kBMITextStyle,
                   ),
                   Text(
-                    'Your BMI result is quite low, you should eat more!',
+                    desc,
                     textAlign: TextAlign.center,
                     style: kBodyTextStyle,
                   )
