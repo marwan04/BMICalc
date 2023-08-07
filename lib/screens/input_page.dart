@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:untitled1/results_page.dart';
-import 'icon_content.dart';
-import 'reusable_card.dart';
-import 'constants.dart';
 import 'results_page.dart';
+import '../components/icon_content.dart';
+import '../components/reusable_card.dart';
+import '../constants.dart';
+import '../components/bottom_button.dart';
+import '../components/round_icon_button.dart';
 
 enum Gender { Male, Female }
 
@@ -229,47 +230,19 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          GestureDetector(
+          BottomButton(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const ResultPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const ResultPage()));
             },
-            child: Container(
-              color: kBottomContainerColor,
-              margin: const EdgeInsets.only(top: 10),
-              width: double.infinity,
-              height: kBottomContainerHeight,
-              child: const Text('Calculate'),
-            ),
-          ),
+            buttonTitle: 'Calculate',
+          )
         ],
       ),
       // floatingActionButton: FloatingActionButton(
       //   onPressed: () {},
       //   child: const Icon(Icons.add),
       // ),
-    );
-  }
-}
-
-class RoundIconButton extends StatelessWidget {
-  const RoundIconButton(
-      {required this.icon, required this.onPressed, super.key});
-
-  final IconData icon;
-  final void Function() onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      elevation: 0,
-      constraints: const BoxConstraints.tightFor(
-        width: 56,
-        height: 56,
-      ),
-      shape: const CircleBorder(),
-      fillColor: const Color(0xFF4C4F5E),
-      onPressed: onPressed,
-      child: Icon(icon),
     );
   }
 }
